@@ -1,0 +1,25 @@
+/*************CSS index.html*********** */
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: 'lato', sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+@media (min-width: 1320px) {
+  .container {
+    max-width: 1240px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
