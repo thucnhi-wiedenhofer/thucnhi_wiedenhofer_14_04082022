@@ -1,12 +1,14 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import FirebaseContext from '../../firebase';
+import { FirebaseContext } from '../../firebase';
+import DatePicker from 'react-datepicker';
 import States from '../../datas/states';
 import Services from '../../datas/services';
+import 'react-datepicker/dist/react-datepicker.css';
 
 function Form() {
   const { firebase } = useContext(FirebaseContext);
-  const { message } = alert;
+
   const [birthDate, setBirthDate] = useState(new Date());
   const [startDate, setStartDate] = useState(new Date());
   const [selectState, setSelectState] = useState(States[0].name);
@@ -24,8 +26,14 @@ function Form() {
   });
 
   const [alert, setAlert] = useState([]);
+  const { message } = alert;
   const [success, setSuccess] = useState(false);
   const Navigate = useNavigate();
+
+  //function to add an employeein database
+  async function addEmployee(employee) {
+    firebase.db.collection('employees').add(employee);
+  }
 
   //Validation form and submit
   const handleSubmit = (e) => {
@@ -57,10 +65,6 @@ function Form() {
   const showAlert = (alert) => {
     setAlert(alert);
   };
-
-  async function addEmployee(employee) {
-    firebase.db.collection('employees').add(employee);
-  }
 
   return (
     <div className="container">
@@ -97,8 +101,11 @@ function Form() {
 
         <div className="form-group">
           <label htmlFor="date-of-birth">Date of Birth</label>
-          <input
-            value={employee.birthdate}
+          <DatePicker
+            className="form-control"
+            selected={birthDate}
+            dateFormat="MM/dd/yyyy"
+            maxDate={new Date()}
             onChange={(date) => {
               setBirthDate(date);
               setEmployee({
@@ -106,16 +113,15 @@ function Form() {
                 birthdate: date,
               });
             }}
-            id="date-of-birth"
-            className="form-control"
-            type="text"
           />
         </div>
 
         <div className="form-group">
           <label htmlFor="start-date">Start Date</label>
-          <input
-            value={employee.startdate}
+          <DatePicker
+            className="form-control"
+            selected={startDate}
+            dateFormat="MM/dd/yyyy"
             onChange={(date) => {
               setStartDate(date);
               setEmployee({
@@ -123,13 +129,10 @@ function Form() {
                 startdate: date,
               });
             }}
-            id="start-date"
-            className="form-control"
-            type="text"
           />
         </div>
 
-        <fieldset class="address">
+        <fieldset className="address">
           <legend>Address</legend>
 
           <div className="form-group">
@@ -161,6 +164,7 @@ function Form() {
           <div className="form-group">
             <label htmlFor="state">State</label>
             <select
+              value={selectState}
               onChange={(e) => {
                 setSelectState(e.target.value);
                 setEmployee({ ...employee, state: e.target.value });
@@ -193,6 +197,7 @@ function Form() {
         <div className="form-group">
           <label htmlFor="department">Department</label>
           <select
+            value={selectService}
             onChange={(e) => {
               setSelectService(e.target.value);
               setEmployee({ ...employee, department: e.target.value });
@@ -214,7 +219,7 @@ function Form() {
           </button>
         </div>
       </form>
-      <div id="confirmation" class="modal">
+      <div id="confirmation" className="modal">
         Employee Created!
       </div>
     </div>
