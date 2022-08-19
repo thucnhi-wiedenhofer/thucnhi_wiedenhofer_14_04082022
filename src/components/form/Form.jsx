@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import FirebaseContext from '../firebase';
-import States from '../datas/states';
-import Services from '../datas/services';
+import FirebaseContext from '../../firebase';
+import States from '../../datas/states';
+import Services from '../../datas/services';
 
 function Form() {
   const { firebase } = useContext(FirebaseContext);
