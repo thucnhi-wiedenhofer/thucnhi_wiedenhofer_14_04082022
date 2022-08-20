@@ -7,7 +7,7 @@ function Header() {
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/">
-          <img src={logo} alt="Wealth Health logo"></img>
+          <img src={logo} alt="Wealth Health logo" width="50"></img>
         </NavLink>
 
         <div className="collapse navbar-collapse" id="navbarColor02">
@@ -15,7 +15,7 @@ function Header() {
             <li className="nav-item">
               <NavLink
                 className={(nav) =>
-                  nav.isActive ? 'nav-item active' : 'nav-item'
+                  nav.isActive ? 'nav-link active' : 'nav-link'
                 }
                 to="/"
               >
@@ -25,7 +25,7 @@ function Header() {
             <li className="nav-item">
               <NavLink
                 className={(nav) =>
-                  nav.isActive ? 'nav-item active' : 'nav-item'
+                  nav.isActive ? 'nav-link active' : 'nav-link'
                 }
                 to="/employee-list"
               >
