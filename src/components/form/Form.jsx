@@ -1,10 +1,13 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FirebaseContext } from '../../firebase';
 import DatePicker from 'react-datepicker';
 import States from '../../datas/states';
 import Services from '../../datas/services';
 import 'react-datepicker/dist/react-datepicker.css';
+import './form.css';
+import Modal from '../Modal/Modal';
+import useModal from '../../hooks/useModal';
 
 function Form() {
   const { firebase } = useContext(FirebaseContext);
@@ -30,9 +33,25 @@ function Form() {
   const [success, setSuccess] = useState(false);
   const Navigate = useNavigate();
 
+  const { isShowing, toggle, reload } = useModal();
+
+  useEffect(() => {
+    if (success) {
+      toggle();
+      setTimeout(() => {
+        reload();
+      }, '6000');
+    }
+  }, [success]);
+
   //function to add an employeein database
   async function addEmployee(employee) {
-    firebase.db.collection('employees').add(employee);
+    try {
+      firebase.db.collection('employees').add(employee);
+      setSuccess(true);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   //Validation form and submit
@@ -58,7 +77,6 @@ function Form() {
       return;
     }
     showAlert({ message: '', error: false });
-
     addEmployee(employee);
   };
 
@@ -155,11 +173,7 @@ function Form() {
                 className="form-select"
               >
                 {Services.map((option, index) => (
-                  <option
-                    key={index}
-                    value={option.name}
-                    className="dropdown-item"
-                  >
+                  <option key={index} value={option.name}>
                     {option.name}
                   </option>
                 ))}
@@ -248,9 +262,7 @@ function Form() {
         </div>
       </form>
 
-      <div id="confirmation" className="modal">
-        Employee Created!
-      </div>
+      <Modal isShowing={isShowing} hide={toggle && reload} />
     </div>
   );
 }
