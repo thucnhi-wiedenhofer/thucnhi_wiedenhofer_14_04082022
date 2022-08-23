@@ -8,18 +8,20 @@ const Modal = ({ isShowing, hide }) =>
         <>
           <div className="modal-overlay">
             <div className="modal-wrapper">
-              <div className="modale">
-                <div className="modal-header">
-                  <button
-                    type="button"
-                    className="modal-close-button"
-                    onClick={hide}
-                  >
-                    <span>&times;</span>
-                  </button>
-                </div>
-                <div className="modal-body">
-                  <h4>Employee Created!</h4>
+              <div className="modal">
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <button
+                        type="button"
+                        className="btn-close"
+                        onClick={hide}
+                      ></button>
+                    </div>
+                    <div className="modal-body">
+                      <p className="modal-title">Employee Created!</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

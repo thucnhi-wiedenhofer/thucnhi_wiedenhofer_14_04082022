@@ -10,12 +10,14 @@ import Modal from '../Modal/Modal';
 import useModal from '../../hooks/useModal';
 
 function Form() {
+  //Use firebase to keep data in cloud and context
   const { firebase } = useContext(FirebaseContext);
 
+  //Initial states of inputs
   const [birthDate, setBirthDate] = useState(new Date());
   const [startDate, setStartDate] = useState(new Date());
-  const [selectState, setSelectState] = useState(States[1].name);
-  const [selectService, setSelectService] = useState(Services[1].name);
+  const [selectState, setSelectState] = useState(States[0].name);
+  const [selectService, setSelectService] = useState(Services[0].name);
   const [employee, setEmployee] = useState({
     firstname: '',
     lastname: '',
@@ -33,18 +35,17 @@ function Form() {
   const [success, setSuccess] = useState(false);
   const Navigate = useNavigate();
 
+  // open Modal when an employee is added
   const { isShowing, toggle, reload } = useModal();
 
   useEffect(() => {
     if (success) {
       toggle();
-      setTimeout(() => {
-        reload();
-      }, '6000');
+      reload();
     }
   }, [success]);
 
-  //function to add an employeein database
+  //function to add an employee in database
   async function addEmployee(employee) {
     try {
       firebase.db.collection('employees').add(employee);
@@ -71,7 +72,7 @@ function Form() {
       ].includes('')
     ) {
       showAlert({
-        message: 'All fields are required',
+        message: 'Warning! All fields are required',
         error: true,
       });
       return;
@@ -89,7 +90,7 @@ function Form() {
       <h1 className="text-center">Create Employee</h1>
 
       <form onSubmit={handleSubmit}>
-        <div className={showAlert ? `is-invalid` : ''}>{message}</div>
+        <p className={showAlert ? `text-warning text-center` : ''}>{message}</p>
         <div className="row justify-content-center">
           <div className="col-lg-5 col-md-8 col-sm-12">
             <div className="form-group">
@@ -262,7 +263,7 @@ function Form() {
         </div>
       </form>
 
-      <Modal isShowing={isShowing} hide={toggle && reload} />
+      <Modal isShowing={isShowing} hide={toggle} />
     </div>
   );
 }

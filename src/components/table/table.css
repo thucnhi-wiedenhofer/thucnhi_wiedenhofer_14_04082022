@@ -1,0 +1,63 @@
+.table {
+  font-family: Roboto !important;
+  color: #000000;
+  max-width: 1240px;
+  margin: 40px auto;
+  padding-left: 0.1rem;
+  padding-right: 0.1rem;
+}
+
+.table-utils {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.neutral {
+  border: none;
+  background-color: #fff;
+}
+
+.grey {
+  color: rgb(218, 211, 211);
+}
+
+.grey-blue {
+  color: rgb(127, 135, 164);
+}
+
+.btn-page {
+  padding: 5px 15px;
+  margin: 10px;
+}
+.show {
+  justify-content: left;
+  display: flex;
+  width: 20%;
+}
+
+.selective {
+  margin: 0 10px;
+  width: 60px;
+}
+
+.filter {
+  justify-content: right;
+  display: flex;
+  width: 30%;
+}
+
+.pagination {
+  justify-content: right;
+  display: flex;
+  width: 100%;
+}
+
+.nav-page {
+  margin: 0 15px;
+}
+
+.showing {
+  width: 30%;
+}
