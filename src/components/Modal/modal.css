@@ -24,4 +24,7 @@
 }
 .modal {
   display: block !important;
+  position: absolute;
+  top: 50%;
+  translate: middle;
 }

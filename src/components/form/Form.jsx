@@ -1,10 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FirebaseContext } from '../../firebase';
+//Install and use react-datepicker library and css
 import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import States from '../../datas/states';
 import Services from '../../datas/services';
-import 'react-datepicker/dist/react-datepicker.css';
 import './form.css';
 import Modal from '../Modal/Modal';
 import useModal from '../../hooks/useModal';
@@ -35,17 +36,16 @@ function Form() {
   const [success, setSuccess] = useState(false);
   const Navigate = useNavigate();
 
-  // open Modal when an employee is added
+  // use useModal hook and useEffect to open Modal when an employee is added
   const { isShowing, toggle, reload } = useModal();
 
   useEffect(() => {
     if (success) {
       toggle();
-      reload();
     }
   }, [success]);
 
-  //function to add an employee in database
+  //function to add an employee in firestore database
   async function addEmployee(employee) {
     try {
       firebase.db.collection('employees').add(employee);
@@ -263,7 +263,8 @@ function Form() {
         </div>
       </form>
 
-      <Modal isShowing={isShowing} hide={toggle} />
+      {/* Display modal only if an employee was added and clear form when close madal*/}
+      <Modal isShowing={isShowing} close={toggle && reload} />
     </div>
   );
 }

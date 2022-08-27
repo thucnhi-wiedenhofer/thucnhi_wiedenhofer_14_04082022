@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './modal.css';
 
-const Modal = ({ isShowing, hide }) =>
+const Modal = ({ isShowing, close }) =>
   isShowing
-    ? ReactDOM.createPortal(
+    ? //create Portal to render modal only if isShowing is true at the end of body
+      ReactDOM.createPortal(
         <>
           <div className="modal-overlay">
             <div className="modal-wrapper">
@@ -15,7 +16,7 @@ const Modal = ({ isShowing, hide }) =>
                       <button
                         type="button"
                         className="btn-close"
-                        onClick={hide}
+                        onClick={close}
                       ></button>
                     </div>
                     <div className="modal-body">

@@ -1,10 +1,43 @@
 .table {
-  font-family: Roboto !important;
-  color: #000000;
   max-width: 1240px;
   margin: 40px auto;
   padding-left: 0.1rem;
   padding-right: 0.1rem;
+  font-size: 16px;
+}
+
+.table-secondary {
+  --bs-table-color: #fff;
+  --bs-table-bg: rgba(255, 255, 255, 0.26);
+  --bs-table-border-color: transparent;
+  --bs-table-striped-bg: rgba(255, 255, 255, 0.29);
+  --bs-table-striped-color: #fff;
+  --bs-table-active-bg: rgba(255, 255, 255, 0.46);
+  --bs-table-active-color: #6c757d;
+  --bs-table-hover-bg: rgba(255, 255, 255, 0.445);
+  --bs-table-hover-color: #6c757d;
+  color: var(--bs-table-color);
+  border-color: var(--bs-table-border-color);
+}
+
+/* top-left border-radius */
+table tr:first-child th:first-child {
+  border-top-left-radius: 15px;
+}
+
+/* top-right border-radius */
+table tr:first-child th:last-child {
+  border-top-right-radius: 15px;
+}
+
+/* bottom-left border-radius */
+table tr:last-child td:first-child {
+  border-bottom-left-radius: 15px;
+}
+
+/* bottom-right border-radius */
+table tr:last-child td:last-child {
+  border-bottom-right-radius: 15px;
 }
 
 .table-utils {
@@ -52,6 +85,14 @@
   justify-content: right;
   display: flex;
   width: 100%;
+}
+
+.pagination .btn {
+  margin: 5px;
+  font-size: 12px;
+  --bs-btn-padding-x: 1.5rem;
+  color: #fff;
+  font-weight: 900;
 }
 
 .nav-page {

@@ -1,6 +1,6 @@
 import React from 'react';
 import './table.css';
-
+//Install and use react-table library and hooks
 import {
   useTable,
   useGlobalFilter,
@@ -85,6 +85,7 @@ const Table = ({ columns, data }) => {
           </span>
         </div>
         <div className="filter">
+          {/* render the GlobalFilter component to make search input */}
           <GlobalFilter
             preGlobalFilteredRows={preGlobalFilteredRows}
             globalFilter={state.globalFilter}
@@ -92,14 +93,20 @@ const Table = ({ columns, data }) => {
           />
         </div>
       </div>
-      <table className="table table-hover" {...getTableProps()} border="1">
+      {/* Apply the table props */}
+      <table
+        className="table table-secondary table-striped table-hover"
+        {...getTableProps()}
+        border="1"
+      >
         <thead>
+          {/* Loop over the header rows */}
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                   {column.render('Header')}
-                  {/* Add a sort direction indicator */}
+                  {/* Add a sort direction indicator when user click on a column header*/}
                   <span className="grey">
                     {column.isSorted ? (
                       column.isSortedDesc ? (
@@ -116,13 +123,16 @@ const Table = ({ columns, data }) => {
             </tr>
           ))}
         </thead>
+        {/* Apply table body  props*/}
         <tbody {...getTableBodyProps()}>
+          {/* Prepare the row for display*/}
           {page.map((row, i) => {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell) => {
                   return (
+                    //render the cell contents
                     <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   );
                 })}
@@ -139,19 +149,17 @@ const Table = ({ columns, data }) => {
         </div>
         <div className="pagination">
           <button
-            className="neutral"
+            className="btn btn-secondary"
             onClick={() => previousPage()}
             disabled={!canPreviousPage}
           >
             {'Previous'}
           </button>
-          <span className="nav-page">
-            <button className="btn-page">
-              <strong>{state.pageIndex + 1}</strong>
-            </button>
-          </span>
+          <button className="btn btn-warning">
+            <strong>{state.pageIndex + 1}</strong>
+          </button>
           <button
-            className="neutral"
+            className="btn btn-secondary"
             onClick={() => nextPage()}
             disabled={!canNextPage}
           >

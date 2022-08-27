@@ -1,10 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { FirebaseContext } from '../firebase';
 import Table from '../components/table/Table';
+//Install and use date-fns library
+import { format } from 'date-fns';
 
 function EmployeeList() {
   const { firebase } = useContext(FirebaseContext);
   const [employees, setEmployees] = useState([]);
+
+  // use React.useMemo here to ensure that our data isn't recreated on every render
+  //only when value actually changes
   const columns = React.useMemo(
     () => [
       {
@@ -18,10 +23,16 @@ function EmployeeList() {
       {
         Header: 'Birthdate',
         accessor: 'birthdate',
+        Cell: ({ value }) => {
+          return format(new Date(value.seconds * 1000), 'MM/dd/yyyy');
+        },
       },
       {
         Header: 'Startdate',
         accessor: 'startdate',
+        Cell: ({ value }) => {
+          return format(new Date(value.seconds * 1000), 'MM/dd/yyyy');
+        },
       },
       {
         Header: 'Street',
@@ -54,8 +65,7 @@ function EmployeeList() {
         ...doc.data(),
       };
     });
-
-    employeesList && setEmployees(employeesList);
+    setEmployees(employeesList);
   }
 
   useEffect(() => {
@@ -63,12 +73,11 @@ function EmployeeList() {
       firebase.db.collection('employees').onSnapshot(processSnapshot);
     };
     getEmployees();
-
-    console.log(employees);
   }, []);
 
   return (
-    <div className="container">
+    <div className="container mt-4">
+      <h1 className="text-center">Employee List</h1>
       <Table columns={columns} data={employees} />
     </div>
   );
