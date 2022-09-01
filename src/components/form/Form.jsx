@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { FirebaseContext } from '../../firebase';
 //Install and use react-datepicker library and css
 import DatePicker from 'react-datepicker';
@@ -7,8 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import States from '../../datas/states';
 import Services from '../../datas/services';
 import './form.css';
-import Modal from '../Modal/Modal';
-import useModal from '../../hooks/useModal';
+import { Modal, useModal } from 'tnw-modal-library';
 
 function Form() {
   //Use firebase to keep data in cloud and context
@@ -34,10 +32,9 @@ function Form() {
   const [alert, setAlert] = useState([]);
   const { message } = alert;
   const [success, setSuccess] = useState(false);
-  const Navigate = useNavigate();
 
   // use useModal hook and useEffect to open Modal when an employee is added
-  const { isShowing, toggle, reload } = useModal();
+  const { isShowing, toggle } = useModal();
 
   useEffect(() => {
     if (success) {
@@ -54,6 +51,8 @@ function Form() {
       console.error(error);
     }
   }
+  //function to refresh form
+  const reload = () => window.location.reload();
 
   //Validation form and submit
   const handleSubmit = (e) => {
@@ -131,7 +130,7 @@ function Form() {
                 className="form-control"
                 selected={birthDate}
                 dateFormat="MM/dd/yyyy"
-                maxDate={new Date()}
+                maxDate={new Date()} //disable birthdate>date
                 onChange={(date) => {
                   setBirthDate(date);
                   setEmployee({
@@ -139,6 +138,8 @@ function Form() {
                     birthdate: date,
                   });
                 }}
+                showYearDropdown
+                dropdownMode="select"
               />
             </div>
             <div className="form-group">
@@ -148,6 +149,7 @@ function Form() {
               <DatePicker
                 className="form-control"
                 selected={startDate}
+                maxDate={new Date()} //disable startdate>date
                 dateFormat="MM/dd/yyyy"
                 onChange={(date) => {
                   setStartDate(date);
@@ -264,7 +266,12 @@ function Form() {
       </form>
 
       {/* Display modal only if an employee was added and clear form when close madal*/}
-      <Modal isShowing={isShowing} close={toggle && reload} />
+      <Modal
+        isShowing={isShowing}
+        close={toggle && reload}
+        title={''}
+        message={'Employee created!'}
+      />
     </div>
   );
 }

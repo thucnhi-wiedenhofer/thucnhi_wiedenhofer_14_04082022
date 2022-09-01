@@ -9,7 +9,8 @@ import {
   usePagination,
 } from 'react-table';
 
-// Define a default UI for filtering
+/* Define a default UI for filtering
+create a search bar component to filter datas in table */
 function GlobalFilter({
   preGlobalFilteredRows,
   globalFilter,
@@ -64,6 +65,7 @@ const Table = ({ columns, data }) => {
 
   return (
     <>
+      {/* Pagination */}
       <div className="table-utils row">
         <div className="show">
           <span>
@@ -141,6 +143,7 @@ const Table = ({ columns, data }) => {
           })}
         </tbody>
       </table>
+      {/* Pagination */}
       <div className="table-utils">
         <div className="showing">
           <span>

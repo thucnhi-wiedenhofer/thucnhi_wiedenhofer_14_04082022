@@ -6,8 +6,7 @@ function toggle to change isShowing value true/false */
 
 const useModal = () => {
   const [isShowing, setIsShowing] = useState(false);
-  //function to refresh form
-  const reload = () => window.location.reload();
+
   function toggle() {
     setIsShowing(!isShowing);
   }
@@ -15,7 +14,6 @@ const useModal = () => {
   return {
     isShowing,
     toggle,
-    reload,
   };
 };
 
