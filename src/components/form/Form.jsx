@@ -40,6 +40,7 @@ function Form() {
     if (success) {
       toggle();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [success]);
 
   //function to add an employee in firestore database

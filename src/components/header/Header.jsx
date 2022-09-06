@@ -8,7 +8,7 @@ function Header() {
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/">
-          <img src={logo} alt="Wealth Health logo" width="50"></img>
+          <img src={logo} alt="Wealth Health logo" width="50" height="50"></img>
         </NavLink>
 
         <div className="collapse navbar-collapse" id="navbarColor02">
