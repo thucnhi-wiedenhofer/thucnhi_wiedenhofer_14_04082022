@@ -9,6 +9,7 @@ function App() {
   return (
     <Router>
       <Header />
+      {/*  Share  firebase data in home and  employeeList */}
       <FirebaseContext.Provider value={{ firebase }}>
         <Routes>
           <Route path="/" element={<Home />} />

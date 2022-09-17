@@ -9,7 +9,7 @@ import './form.css';
 import { Modal, useModal } from 'tnw-modal-library';
 
 function Form() {
-  //Use firebase to keep data in cloud and context
+  //Use firebase to keep data in cloud and use hook useContext to
   const { firebase } = useContext(FirebaseContext);
 
   //Initial states of inputs

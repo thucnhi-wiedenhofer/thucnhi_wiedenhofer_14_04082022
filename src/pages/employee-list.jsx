@@ -73,7 +73,7 @@ function EmployeeList() {
       firebase.db.collection('employees').onSnapshot(processSnapshot);
     };
     getEmployees();
-  }, []);
+  }, [firebase.db]);
 
   return (
     <div className="container mt-4">
